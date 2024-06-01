@@ -1,6 +1,8 @@
 package br.com.alura.audio.modelos;
 
-public class Episodio {
+import br.com.alura.audio.calculos.Classificavel;
+
+public class Episodio implements Classificavel {
     private int numero;
     private String nome;
     private Podcast podcast;
@@ -38,6 +40,7 @@ public class Episodio {
         this.podcast = podcast;
     }
 
+    @Override
     public int getClassificacao() {
         if (totalVisualizacoes > 100) {
             return 4;

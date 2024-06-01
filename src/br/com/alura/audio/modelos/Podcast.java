@@ -1,9 +1,9 @@
 package br.com.alura.audio.modelos;
 
-public class Podcast extends Audio{
+import br.com.alura.screenmatch.calculos.Classificavel;
 
+public class Podcast extends Audio implements Classificavel {
     private int temporadas;
-    private boolean ativa;
     private int episodiosPorTemporada;
     private int minutosPorEpisodio;
 
@@ -13,14 +13,6 @@ public class Podcast extends Audio{
 
     public void setTemporadas(int temporadas) {
         this.temporadas = temporadas;
-    }
-
-    public boolean isAtiva() {
-        return ativa;
-    }
-
-    public void setAtiva(boolean ativa) {
-        this.ativa = ativa;
     }
 
     public int getEpisodiosPorTemporada() {
@@ -39,8 +31,20 @@ public class Podcast extends Audio{
         this.minutosPorEpisodio = minutosPorEpisodio;
     }
 
-    @Override
-    public int getDuracaoEmMinutos() {
+    public int getDuracaoTotal() {
         return temporadas * episodiosPorTemporada * minutosPorEpisodio;
+    }
+
+    @Override
+    public void exibeFichaTecnica() {
+        super.exibeFichaTecnica();
+        System.out.println("Temporadas: " + temporadas);
+        System.out.println("Episódios por temporada: " + episodiosPorTemporada);
+        System.out.println("Minutos por episódio: " + minutosPorEpisodio);
+    }
+
+    @Override
+    public int getClassificacao() {
+        return (int) pegaMedia() / 2; // Exemplo de classificação baseado na média de avaliações
     }
 }

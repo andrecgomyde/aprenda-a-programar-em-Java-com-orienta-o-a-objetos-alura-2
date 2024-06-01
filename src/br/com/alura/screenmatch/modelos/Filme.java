@@ -3,14 +3,20 @@ package br.com.alura.screenmatch.modelos;
 import br.com.alura.screenmatch.calculos.Classificavel;
 
 public class Filme extends Titulo implements Classificavel {
-    private String diretor;
+    private double somaDasAvaliacoes;
+    private int totalDeAvaliacoes;
 
-    public String getDiretor() {
-        return diretor;
+    public void avalia(double nota) {
+        somaDasAvaliacoes += nota;
+        totalDeAvaliacoes++;
     }
 
-    public void setDiretor(String diretor) {
-        this.diretor = diretor;
+    public double pegaMedia() {
+        return somaDasAvaliacoes / totalDeAvaliacoes;
+    }
+
+    public int getTotalDeAvaliacoes() {
+        return totalDeAvaliacoes;
     }
 
     @Override

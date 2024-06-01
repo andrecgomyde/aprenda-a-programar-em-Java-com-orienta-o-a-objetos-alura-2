@@ -3,10 +3,8 @@ import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelos.Episodio;
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
-
 import br.com.alura.audio.modelos.Musica;
 import br.com.alura.audio.modelos.Podcast;
-import br.com.alura.audio.modelos.Audio;
 
 public class Principal {
     public static void main(String[] args) {
@@ -22,7 +20,7 @@ public class Principal {
         meuFilme.avalia(5);
         meuFilme.avalia(10);
         System.out.println("Total de avaliações: " + meuFilme.getTotalDeAvaliacoes());
-        System.out.println(meuFilme.pegaMedia());
+        System.out.println("Média das avaliações: " + meuFilme.pegaMedia());
 
         Serie lost = new Serie();
         lost.setNome("Lost");
@@ -31,7 +29,7 @@ public class Principal {
         lost.setTemporadas(10);
         lost.setEpisodiosPorTemporada(10);
         lost.setMinutosPorEpisodio(50);
-        System.out.println("Duração para maratonar Lost: " + lost.getDuracaoEmMinutos());
+        System.out.println("Duração para maratonar Lost: " + lost.getDuracaoEmMinutos() + " minutos");
 
         Filme outroFilme = new Filme();
         outroFilme.setNome("Avatar");
@@ -70,27 +68,22 @@ public class Principal {
 
         // Testando a classe Podcast
         Podcast meuPodcast = new Podcast();
-        meuPodcast.setNome("Alura Podcast");
-        meuPodcast.setAnoDeLancamento(2020);
-        meuPodcast.setTemporadas(3);
-        meuPodcast.setEpisodiosPorTemporada(10);
-        meuPodcast.setMinutosPorEpisodio(30);
-        meuPodcast.setIncluidoNoPlano(true);
+        meuPodcast.setNome("Podcast de Tecnologia");
+        meuPodcast.setAnoDeLancamento(2022);
+        meuPodcast.setTemporadas(2);
+        meuPodcast.setEpisodiosPorTemporada(12);
+        meuPodcast.setMinutosPorEpisodio(45);
+        meuPodcast.avalia(9);
+        meuPodcast.avalia(8);
+        meuPodcast.avalia(7);
+        System.out.println("Média de avaliações do podcast: " + meuPodcast.pegaMedia());
+        System.out.println("Classificação do podcast: " + meuPodcast.getClassificacao());
+
         meuPodcast.exibeFichaTecnica();
-        System.out.println("Duração total do podcast: " + meuPodcast.getDuracaoEmMinutos() + " minutos");
+        System.out.println("Duração total do podcast: " + meuPodcast.getDuracaoTotal() + " minutos");
 
-        calculadora.inclui(minhaMusica);
-        calculadora.inclui(meuPodcast);
-        System.out.println("Tempo total para assistir e ouvir tudo: " + calculadora.getTempoTotal() + " minutos");
-
+        // Usando FiltroRecomendacao para Musica e Podcast
         filtro.filtra(minhaMusica);
-
-        // Adicionando um episódio de podcast para teste de recomendação
-        Episodio episodioPodcast = new Episodio();
-        episodioPodcast.setNumero(1);
-        episodioPodcast.setNome("Introdução ao Java");
-        episodioPodcast.setPodcast(meuPodcast);
-        episodioPodcast.setTotalVisualizacoes(120);
-        filtro.filtra(episodioPodcast);
+        filtro.filtra(meuPodcast);
     }
 }
