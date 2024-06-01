@@ -4,8 +4,13 @@ import br.com.alura.screenmatch.modelos.Episodio;
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
 
+import br.com.alura.audio.modelos.Musica;
+import br.com.alura.audio.modelos.Podcast;
+import br.com.alura.audio.modelos.Audio;
+
 public class Principal {
     public static void main(String[] args) {
+        // Testando a classe Filme
         Filme meuFilme = new Filme();
         meuFilme.setNome("O poderoso chefão");
         meuFilme.setAnoDeLancamento(1970);
@@ -18,9 +23,6 @@ public class Principal {
         meuFilme.avalia(10);
         System.out.println("Total de avaliações: " + meuFilme.getTotalDeAvaliacoes());
         System.out.println(meuFilme.pegaMedia());
-        //meuFilme.somaDasAvaliacoes = 10;
-        //meuFilme.totalDeAvaliacoes = 1;
-        //System.out.println(meuFilme.pegaMedia());
 
         Serie lost = new Serie();
         lost.setNome("Lost");
@@ -40,7 +42,7 @@ public class Principal {
         calculadora.inclui(meuFilme);
         calculadora.inclui(outroFilme);
         calculadora.inclui(lost);
-        System.out.println(calculadora.getTempoTotal());
+        System.out.println("Tempo total para assistir tudo: " + calculadora.getTempoTotal() + " minutos");
 
         FiltroRecomendacao filtro = new FiltroRecomendacao();
         filtro.filtra(meuFilme);
@@ -50,5 +52,45 @@ public class Principal {
         episodio.setSerie(lost);
         episodio.setTotalVisualizacoes(300);
         filtro.filtra(episodio);
+
+        // Testando a classe Musica
+        Musica minhaMusica = new Musica();
+        minhaMusica.setNome("Bohemian Rhapsody");
+        minhaMusica.setAnoDeLancamento(1975);
+        minhaMusica.setDuracaoEmMinutos(6);
+        minhaMusica.setCompositor("Freddie Mercury");
+        minhaMusica.avalia(10);
+        minhaMusica.avalia(9);
+        minhaMusica.avalia(10);
+        System.out.println("Média de avaliações da música: " + minhaMusica.pegaMedia());
+        System.out.println("Classificação da música: " + minhaMusica.getClassificacao());
+
+        minhaMusica.exibeFichaTecnica();
+        System.out.println("Compositor: " + minhaMusica.getCompositor());
+
+        // Testando a classe Podcast
+        Podcast meuPodcast = new Podcast();
+        meuPodcast.setNome("Alura Podcast");
+        meuPodcast.setAnoDeLancamento(2020);
+        meuPodcast.setTemporadas(3);
+        meuPodcast.setEpisodiosPorTemporada(10);
+        meuPodcast.setMinutosPorEpisodio(30);
+        meuPodcast.setIncluidoNoPlano(true);
+        meuPodcast.exibeFichaTecnica();
+        System.out.println("Duração total do podcast: " + meuPodcast.getDuracaoEmMinutos() + " minutos");
+
+        calculadora.inclui(minhaMusica);
+        calculadora.inclui(meuPodcast);
+        System.out.println("Tempo total para assistir e ouvir tudo: " + calculadora.getTempoTotal() + " minutos");
+
+        filtro.filtra(minhaMusica);
+
+        // Adicionando um episódio de podcast para teste de recomendação
+        Episodio episodioPodcast = new Episodio();
+        episodioPodcast.setNumero(1);
+        episodioPodcast.setNome("Introdução ao Java");
+        episodioPodcast.setPodcast(meuPodcast);
+        episodioPodcast.setTotalVisualizacoes(120);
+        filtro.filtra(episodioPodcast);
     }
 }
